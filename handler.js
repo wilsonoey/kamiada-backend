@@ -93,7 +93,7 @@ async function registerUser(request, h) {
           } else if (resultschecker.length === 0) {
             if ((addOtherPayload.username && addOtherPayload.emailuser) == null) {
               resolve(h.response(
-                clienterror('Username dan email tidak boleh kosong.')
+                clienterror('Username atau email tidak boleh kosong.')
               ).code(400));
             } else {
               const query = 'INSERT INTO userskad SET ?';
