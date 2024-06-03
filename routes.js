@@ -36,14 +36,6 @@ const routes = [
     }
   },
   {
-    method: 'DELETE',
-    path: '/user/logout',
-    handler: part.logoutkad,
-    options: {
-      auth: 'kamiada_jwt',
-    }
-  },
-  {
     method: 'GET',
     path: '/dashboard',
     handler: part.dashboarduserkad,
