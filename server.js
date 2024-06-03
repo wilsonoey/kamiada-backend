@@ -17,7 +17,7 @@ const init = async () => {
     },
   });
 
-  server.ext('onPreResponse', (request, h) => {
+  server.ext('onPreResponse', async(request, h) => {
     // mendapatkan konteks response dari request
     const { response } = request;
     const id = nanoid(25);
@@ -29,12 +29,7 @@ const init = async () => {
         createdaterror: createdat,
       };
       const query = 'INSERT INTO errorkad SET ?';
-      connection.query(query, data, (error) => {
-        if (error) {
-          console.error(error);
-        }
-        h.response(success('Error berhasil ditambahkan')).code(201);
-      });
+      await connection.query(query, data);
     }
     // jika bukan error, lanjutkan dengan response sebelumnya (tanpa terintervensi)
     return h.continue;
