@@ -366,27 +366,6 @@ async function deleteUser(request, h) {
   }
 }
 
-async function logoutuser(request, h) {
-  try {
-    const verify = request.state.refreshToken;
-    if (verify === undefined) {
-      return h.response(
-        clienterror('Token tidak ditemukan. Silakan login terlebih dahulu')
-      ).code(400);
-    } else {
-      return await partAuth.deleteToken(verify).then((results) => {
-        if (results.affectedRows > 0) {
-          return h.response(success('Logout berhasil')).code(200);
-        } else {
-          return h.response(clienterror('Logout gagal')).code(400);
-        }
-      });
-    }
-  } catch (error) {
-    senderror(request, h, error, "logoutUser");
-  }
-}
-
 async function dashboarduser(request, h) {
   try {
     // const verify = request.state.refreshToken;
@@ -677,7 +656,6 @@ const part = {
   getusermekad: getuserme,
   editinfouserkad: editInfoUser,
   deleteuserkad: deleteUser,
-  logoutkad: logoutuser,
   dashboarduserkad: dashboarduser,
   addservicebyuserkad: addservicebyuser,
   allservicekad: getallservice,
