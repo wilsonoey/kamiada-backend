@@ -1,24 +1,18 @@
 const connection = require('./connection');
 
 async function addRefreshToken(token) {
-    const query = `INSERT INTO authuserskad SET tokenuser = '${token}'`;
-    return new Promise((resolve, reject) => {
-        connection.query(query, (error, results) => error ? reject(error) : resolve(results));
-    });
+    const query = 'INSERT INTO authuserskad SET tokenuser = ?';
+    await connection.query(query, token);
 }
 
 async function verifyRefreshToken(token) {
-    const query = `SELECT token FROM authuserskad WHERE tokenuser = '${token}'`;
-    return new Promise((resolve, reject) => {
-        connection.query(query, (error, results) => error ? reject(error) : resolve(results));
-    });
+    const query = 'SELECT token FROM authuserskad WHERE tokenuser = ?';
+    await connection.query(query, token);
 }
 
 async function deleteRefreshToken(token) {
-    const query = `DELETE FROM authuserskad WHERE tokenuser = '${token}'`;
-    return new Promise((resolve, reject) => {
-        connection.query(query, (error, results) => error ? reject(error) : resolve(results));
-    });
+    const query = 'DELETE FROM authuserskad WHERE tokenuser = ?';
+    await connection.query(query, token);
 }
 
 const partAuth = {
