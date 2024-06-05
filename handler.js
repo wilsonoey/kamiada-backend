@@ -124,16 +124,19 @@ async function editInfoUser(request, h) {
   try {
     const verificator = request.auth.credentials;
     const updatedat = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
-    const data = {
-      ...request.payload,
-      updatedatuser: updatedat,
-    };
     const checkiduser = 'SELECT * FROM userskad WHERE iduser = ?';
     const [resultsiduser] = await connection.query(checkiduser, verificator.iduser);
-
     if (resultsiduser.length === 0) {
       return h.response(notfound('User tidak ditemukan')).code(404);
     } else {
+      const data = {
+        ...request.payload,
+        updatedatuser: updatedat,
+      };
+      if (data.passworduser) {
+        const hashedPass = await bcrypt.hash(data.passworduser, 10);
+        data.passworduser = hashedPass;
+      }
       const updateQuery = 'UPDATE userskad SET ? WHERE iduser = ?';
       const [results] = await connection.query(updateQuery, [data, verificator.iduser]);
       if (results.affectedRows > 0) {
