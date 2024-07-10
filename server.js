@@ -25,7 +25,7 @@ const init = async () => {
     if (response.isBoom) {
       const data = {
         iderror: id,
-        detailerror: response.message || response.output.payload,
+        detailerror: response.message,
         createdaterror: createdat,
       };
       const query = 'INSERT INTO errorkad SET ?';
