@@ -97,6 +97,11 @@ const routes = [
     path: '/error',
     handler: part.geterrorkad,
   },
+  {
+    method: '*',
+    path: '/{p*}',
+    handler: part.besides,
+  },
 ];
 
 module.exports = routes;
