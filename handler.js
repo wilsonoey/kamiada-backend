@@ -380,6 +380,13 @@ async function geterror(request, h) {
   }
 }
 
+function notfound(req, res) {
+  return res.response({
+    status: 'fail',
+    message: 'Halaman yang Anda cari tidak ditemukan',
+  }).code(404);
+}
+
 const part = {
   loginkad: loginUser,
   registerkad: registerUser,
@@ -396,6 +403,7 @@ const part = {
   updateservicekad: updateservice,
   deleteservicekad: deleteservice,
   geterrorkad: geterror,
+  besides: notfound,
 };
 
 module.exports = part;
