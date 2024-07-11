@@ -380,7 +380,7 @@ async function geterror(request, h) {
   }
 }
 
-function notfound(req, res) {
+function routesOthers(req, res) {
   return res.response({
     status: 'fail',
     message: 'Halaman yang Anda cari tidak ditemukan',
@@ -403,7 +403,7 @@ const part = {
   updateservicekad: updateservice,
   deleteservicekad: deleteservice,
   geterrorkad: geterror,
-  besides: notfound,
+  besides: routesOthers,
 };
 
 module.exports = part;
